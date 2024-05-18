@@ -29,18 +29,39 @@ export default function Login(){
   const submitHandler=async()=>{
         console.log(email);
         console.log(password);
-        axios.post('http://localhost:4000/appuser/userlogin', {
-          email: email,
+        // axios.post('http://localhost:4000/appuser/userlogin', {
+        //   email: email,
+        //   password: password
+        // })
+        axios.post('http://localhost:5000/student/login', {
+          name: email,
           password: password
         })
         .then(function (response) {
           console.log(response);
+          if(response.data){
+            localStorage.setItem("token",response.data.data);
+          }
         })
         .catch(function (error) {
           console.log(error);
         });
   }
-  
+  const getstudents=async()=>{
+    const token = localStorage.getItem("token");
+
+    axios.get('http://localhost:5000/student/getStudent',{
+    headers:{
+      Authorization : `Bearer ${token}`
+    }
+    }).then(function (response) {
+          console.log(response);
+          
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+  }
   return (
     <div>
     <FormControl variant="standard">
@@ -89,6 +110,8 @@ export default function Login(){
     <br></br>
     {/* <img src={'https://i.ibb.co/QkNBy3b/eren-attack-on-titan-final-season-part-3-4k-wallpaper-uhdpaper-com-917-1-j.jpg'} style={{width:"200px"}}></img> */}
     <button className="button-81" role="button" onClick={submitHandler}>Submit</button>
+    <br></br>
+    <button className="button-81" role="button" onClick={getstudents}>Get students</button>
     </div>
 );
 }
