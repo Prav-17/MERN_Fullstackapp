@@ -13,7 +13,7 @@ const AppuserSchema = new mongoose.Schema({
         type:Number,        
     },
     country:{
-        type:Number
+        type:String,
     },
     premiumuser:{
         type:Boolean

@@ -1,12 +1,14 @@
 //step 1
 var express = require("express"); //import 
 var mongoose = require("mongoose");
-const userRoute=require("./route/userRoutes")
+const userRoute=require("./route/userRoutes");
+var cors = require("cors");
 
 //step 2
 var app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // step 4 api creation
 app.get('/',(request,response)=>{
