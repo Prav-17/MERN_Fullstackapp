@@ -5,12 +5,25 @@ import Signin from './container/signin/signin';
 import {Routes,Route} from 'react-router-dom';
 import Dashboard from './container/dashboard/dashboard';
 import Changepassword from './container/update/passwordupdate';
+import { ImageUpload } from './container/imageupload/imageupload';
 
 function App() {
   return (
     <div className="App">
       <div><h1>Full stack web</h1></div>
+      <div>
+        <a href='/dashboard'>
+          Dashboard
+        </a>
+        <a href="/imageupload">
+          Imageupload
+        </a>
+        <a href="/changepassword">
+          Changepassword
+        </a>
+      </div>
       <Routes>
+        <Route path='/imageupload' element={<ImageUpload/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signin' element={<Signin/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>

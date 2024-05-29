@@ -7,6 +7,7 @@ export default function Dashboard(){
     const [user,setUser]=useState({});
 
     const getuser=async()=>{
+        try{
         const token = localStorage.getItem("token");
         const decrpt=jwtDecode(token); //jwt decode
         console.log(decrpt);
@@ -25,6 +26,9 @@ export default function Dashboard(){
             .catch(function (error) {
               console.log(error);
             });
+        }catch(err){
+            console.log(err);
+        }
       }
     
     useEffect(()=>{
@@ -34,11 +38,12 @@ export default function Dashboard(){
 
     return(
         <div>
-            User details
-        <div>Name : {user && user.name} </div>    
-        <div>email : {user && user.email} </div> 
-        <div>Contact : {user && user.contact} </div> 
+           {user && ( <div>
+                User details
+                <div>Name : {user && user.name} </div>    
+                <div>email : {user && user.email} </div> 
+                <div>Contact : {user && user.contact} </div> 
+            </div>)}
         </div>
-            
     )
 }
