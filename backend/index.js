@@ -2,6 +2,7 @@
 var express = require("express"); //import 
 var mongoose = require("mongoose");
 const userRoute=require("./route/userRoutes");
+const Productroute=require("./route/productRoutes");
 var cors = require("cors");
 
 //step 2
@@ -17,6 +18,7 @@ app.get('/',(request,response)=>{
 
 //step 6 mention api path here
 app.use("/appuser",userRoute); 
+app.use("/product",Productroute);
 
 var uri = "mongodb+srv://praveen17mails:Praveen17@cluster0.3upltpv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 var connectionParams = {useNewUrlParser:true,useUnifiedTopology:true};

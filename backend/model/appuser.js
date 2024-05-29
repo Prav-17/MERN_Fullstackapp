@@ -18,9 +18,14 @@ const AppuserSchema = new mongoose.Schema({
     premiumuser:{
         type:Boolean
     },
+    role:{
+        type:String,
+        enum:['admin','seller','buyer'],
+    },
     email:{
         type:String,
-        required:true
+        required:true,
+        unique:true
     },
     contact:{
         type:String,

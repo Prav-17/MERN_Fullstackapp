@@ -10,7 +10,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
-
+import {jwtDecode} from 'jwt-decode'
 import "./login.css"
 import axios from 'axios';
 
@@ -29,14 +29,14 @@ export default function Login(){
   const submitHandler=async()=>{
         console.log(email);
         console.log(password);
-        // axios.post('http://localhost:4000/appuser/userlogin', {
-        //   email: email,
-        //   password: password
-        // })
-        axios.post('http://localhost:5000/student/login', {
-          name: email,
+        axios.post('http://localhost:4000/appuser/userlogin', {
+          email: email,
           password: password
         })
+        // axios.post('http://localhost:5000/student/login', {
+        //   name: email,
+        //   password: password
+        // })
         .then(function (response) {
           console.log(response);
           if(response.data){
@@ -47,10 +47,13 @@ export default function Login(){
           console.log(error);
         });
   }
-  const getstudents=async()=>{
+  const getuser=async()=>{
+    try{
     const token = localStorage.getItem("token");
+    const decrpt=jwtDecode(token); //jwt decode
+    console.log(decrpt);
 
-    axios.get('http://localhost:5000/student/getStudent',{
+    axios.get('http://localhost:4000/appuser/userdetails',{
     headers:{
       Authorization : `Bearer ${token}`
     }
@@ -61,6 +64,9 @@ export default function Login(){
         .catch(function (error) {
           console.log(error);
         });
+      }catch(err){
+        console.error(err);
+      }
   }
   return (
     <div>
@@ -111,7 +117,7 @@ export default function Login(){
     {/* <img src={'https://i.ibb.co/QkNBy3b/eren-attack-on-titan-final-season-part-3-4k-wallpaper-uhdpaper-com-917-1-j.jpg'} style={{width:"200px"}}></img> */}
     <button className="button-81" role="button" onClick={submitHandler}>Submit</button>
     <br></br>
-    <button className="button-81" role="button" onClick={getstudents}>Get students</button>
+    <button className="button-81" role="button" onClick={getuser}>Get user</button>
     </div>
 );
 }
