@@ -17,6 +17,8 @@ import axios from 'axios';
 export default function Login(){
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
+  const [productName,setProductName]=useState("");
+  const [product,setProduct]=useState("");
 
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -56,7 +58,11 @@ export default function Login(){
     axios.get('http://localhost:4000/appuser/userdetails',{
     headers:{
       Authorization : `Bearer ${token}`
+    },
+    params:{
+      email:decrpt.useremail
     }
+    
     }).then(function (response) {
           console.log(response);
           
@@ -68,6 +74,36 @@ export default function Login(){
         console.error(err);
       }
   }
+  
+  const getProduct=async()=>{
+    try{
+    // const token = localStorage.getItem("token");
+    // const decrpt=jwtDecode(token); //jwt decode
+    // console.log(decrpt);
+
+    axios.get('http://localhost:4000/product/getproduct',{
+    // headers:{
+    //   Authorization : `Bearer ${token}`
+    // },
+    params:{
+      productname:productName
+      //towards backend : frontend var name
+    }
+    
+    }).then(function (response) {
+          console.log(response);
+          if(response.data.data){
+            setProduct(response.data.data);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }catch(err){
+        console.error(err);
+      }
+  }
+
   return (
     <div>
     <FormControl variant="standard">
@@ -118,6 +154,10 @@ export default function Login(){
     <button className="button-81" role="button" onClick={submitHandler}>Submit</button>
     <br></br>
     <button className="button-81" role="button" onClick={getuser}>Get user</button>
+    <button className="button-81" role="button" onClick={getProduct}>Get product</button><br></br>
+    <TextField id="input-with-sx" label="productname" variant="standard" onChange={(e)=>{setProductName(e.target.value)}} />
+    <br></br>
+    <img src={product.image} alt='not yet'/>  
     </div>
 );
 }

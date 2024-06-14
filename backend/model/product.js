@@ -6,7 +6,7 @@ const ProductSchema = new mongoose.Schema({
             required:true
         },
         productprice:{
-            type:String,
+            type:Number,
             required:true
         },
         productmanufacturer:{

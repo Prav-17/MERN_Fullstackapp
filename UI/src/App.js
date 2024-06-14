@@ -6,6 +6,10 @@ import {Routes,Route} from 'react-router-dom';
 import Dashboard from './container/dashboard/dashboard';
 import Changepassword from './container/update/passwordupdate';
 import { ImageUpload } from './container/imageupload/imageupload';
+import Addproduct from './container/Addproduct/addproduct';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (
@@ -28,7 +32,9 @@ function App() {
         <Route path='/signin' element={<Signin/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path='/changepassword' element={<Changepassword/>}/>
+        <Route path='/Addproduct' element={<Addproduct/>}/>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
