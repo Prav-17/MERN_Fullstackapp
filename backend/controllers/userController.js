@@ -97,7 +97,7 @@ const deleteUser = async(req,res)=>{
     try{
         const data =  req.body;
         const user = await Appuser.findOneAndDelete({email:req.body.email});
-        res.send({Status:"Success",data:te});
+        res.send({Status:"Success",data:user});
     }catch(err){
         console.log(err);
         res.send({Status:"Fail",data:err});

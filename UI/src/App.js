@@ -9,13 +9,18 @@ import { ImageUpload } from './container/imageupload/imageupload';
 import Addproduct from './container/Addproduct/addproduct';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Home from './container/Home/Home';
+import ResponsiveAppBar from './container/navbar/navbar';
 
 
 function App() {
   return (
     <div className="App">
-      <div><h1>Full stack web</h1></div>
+      
+      <ResponsiveAppBar/>
+      {/* <div><h1>Full stack web</h1></div>
       <div>
+        
         <a href='/dashboard'>
           Dashboard
         </a>
@@ -25,8 +30,9 @@ function App() {
         <a href="/changepassword">
           Changepassword
         </a>
-      </div>
+      </div> */}
       <Routes>
+      <Route path='' element={<Home/>}/>
         <Route path='/imageupload' element={<ImageUpload/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signin' element={<Signin/>}/>

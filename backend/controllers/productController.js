@@ -40,9 +40,31 @@ const getProduct = async(req,res)=>{
         res.send({Status:"Fail",data:error});
     }
 }
+const deleteProduct = async(req,res)=>{
+    try{
+        const data =  req.body;
+        const product = await Productdetails.findOneAndDelete({productname:req.body.productname});
+        res.send({Status:"Success",data:product});
+    }catch(err){
+        console.log(err);
+        res.send({Status:"Fail",data:err});
+    }
+}
 
+const updateProduct= async(req,res)=>{
+    try{
+        const data =  req.body;
+        const product = await Productdetails.findOneAndUpdate( {productname:req.body.productname},{stockavailable:req.body.stockavailable},{new:true});
+        res.send({Status:"Success",data:product});
+        console.log(product);
+    }catch(err){
+        res.send({Status:"Failed",data:err});
+    }
+}
 
 module.exports={
     addProduct,
-    getProduct
+    getProduct,
+    deleteProduct,
+    updateProduct
 }
