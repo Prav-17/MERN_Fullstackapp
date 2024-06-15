@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
       
-      <ResponsiveAppBar/>
+      {/* <ResponsiveAppBar/> */}
       {/* <div><h1>Full stack web</h1></div>
       <div>
         
