@@ -13,6 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import {jwtDecode} from 'jwt-decode'
 import "./login.css"
 import axios from 'axios';
+import ResponsiveAppBar from '../navbar/navbar';
 
 export default function Login(){
   const [email,setEmail]=useState("");
@@ -139,6 +140,7 @@ const updateproduct = async()=>{
 
   return (
     <div>
+      <ResponsiveAppBar/>
     <FormControl variant="standard">
     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
       <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />

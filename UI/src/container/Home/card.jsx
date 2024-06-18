@@ -6,14 +6,10 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -27,7 +23,8 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function ProductCard(props) {
-  console.log(props);
+  console.log(props.details);
+  console.log(props.details.productname);
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -35,41 +32,25 @@ export default function ProductCard(props) {
   };
 
   return (
-    props && 
-    <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            P
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={props.name}
-        subheader={props.price}
+    props.details && 
+    <Card sx={{ maxWidth: 345,marginRight:"2%" }}>
+      <CardHeader        
+        title={props.details.productname}
+        subheader={props.details.category}
       />
       <CardMedia
         component="img"
-        height="194"
-        image={props.imgsrc}
-        alt={props.name}
+        height="250"
+        image={props.details.image}
+        alt={props.details.productname}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {props.description}
+          {props.details.description}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-        <Typography>{props.price}</Typography>
+      <CardActions disableSpacing>        
+        <Typography>{props.details.productprice}</Typography>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
@@ -83,7 +64,7 @@ export default function ProductCard(props) {
         <CardContent>
           <Typography paragraph>Manufacture:</Typography>
           <Typography paragraph>
-            {props.manufacture}
+            {props.details.productmanufacturer}
           </Typography>
           </CardContent>
       </Collapse>

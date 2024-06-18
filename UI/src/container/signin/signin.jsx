@@ -7,6 +7,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import axios from 'axios';
+import ResponsiveAppBar from "../navbar/navbar";
 
 export default function Signin(){
     
@@ -40,7 +41,8 @@ export default function Signin(){
     
     return(
         <div>
-            <h1>Sign up</h1>
+          <ResponsiveAppBar/>
+        <h1>Sign up</h1>
         <FormControl>
         <TextField
              required

@@ -10,6 +10,7 @@ import Card from '@mui/material/Card'; // or '@material-ui/core/Card' for v4
 import Button from '@mui/material/Button'; // or '@material-ui/core/Button' for v4
 import { toast } from 'react-toastify';
 import CircularProgress from '@mui/material/CircularProgress';
+import ResponsiveAppBar from "../navbar/navbar";
 
 export default function Addproduct(){
     
@@ -103,6 +104,7 @@ export default function Addproduct(){
     
     return(
         <div>
+          <ResponsiveAppBar/>
             <h1>Sign up</h1>
         <FormControl>
         <TextField

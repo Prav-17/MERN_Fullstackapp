@@ -13,13 +13,27 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import BlenderTwoToneIcon from '@mui/icons-material/BlenderTwoTone';
+import { useNavigate } from 'react-router-dom';
 
-const pages = ['Products', 'About', 'Contact us', 'Login'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+const pages = ['View Products', 'Add Products', 'Update Products'];
+const settings = ['Profile', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
+
+  const handleNav=(pg)=>{
+    if(pg==="View Products"){
+      navigate('/product');
+    }else if(pg==="Add Products"){
+      navigate('/addproduct');
+    }else if(pg==="Update Products"){
+      navigate('/updateproduct');
+    }
+  }
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -90,7 +104,7 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center" onClick={()=>handleNav(page)}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -118,7 +132,7 @@ function ResponsiveAppBar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={()=>handleNav(page)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}

@@ -13,8 +13,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import BlenderTwoToneIcon from '@mui/icons-material/BlenderTwoTone';
+import { useNavigate } from 'react-router-dom';
 
-const pages = ['Products', 'About', 'Contact us'];
+const pages = ['Home','About', 'Contact us'];
 
 
 function HomeHeader() {
@@ -24,8 +25,10 @@ function HomeHeader() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+ 
+  const navigate = useNavigate();
 
-
+ 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -34,9 +37,22 @@ function HomeHeader() {
     setAnchorElUser(null);
   };
 
-  const gotologin = () => {
-    console.log("gotologin")
+  const gotologin = () => {//handler
+    console.log("gotologin");
+    navigate('/login');
   };
+
+  const handleNav=(pg)=>{
+    if(pg==="Home"){
+      navigate('/');
+    }
+    else if(pg==="About"){
+      navigate('/about');
+    }
+    else if(pg==="Contact us"){
+      navigate('/contactus');
+    }
+  }
 
 
   return (
@@ -93,7 +109,7 @@ function HomeHeader() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center" onClick={()=>handleNav(page)}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -121,7 +137,7 @@ function HomeHeader() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={()=>handleNav(page)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
