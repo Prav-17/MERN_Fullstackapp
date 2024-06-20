@@ -1,12 +1,40 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./home.css";
 import ProductCard from './card';
 import HomeHeader from '../navbar/homeHeader';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Home() {
   const navigate = useNavigate();
 
+ const productN =['Samsung A12','PocoF12', 'VivoV15'];
+ const[productdet,setProductdet]=useState();
+
+  const disproduct=async()=>{
+    try{
+        axios.post('http://localhost:4000/product/getproduct',{
+          params:{
+            productname:productN.map()
+          }
+        }).then(function (response) {
+                    console.log(response);
+                    if(response.data.data){
+                      setProductdet(response.data.data);
+                    }
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+                }catch(err){
+                  console.error(err);
+                }
+            }
+  
+  
+  
+  
+  
   const product = [{
     productname:"Samsung s22",
     productprice:"Rs.13000",
@@ -53,10 +81,11 @@ export default function Home() {
       <HomeHeader/>
       <div className='hm-mainDiv'>   
         <div style={{display:"flex",margin:"2%"}}>
-          {product.map((productDetails)=>{
+          {
+          productdet.map(()=>{
             return(
             <ProductCard 
-              details={productDetails}         
+              details={productdet}         
             />
             )            
           })}          
