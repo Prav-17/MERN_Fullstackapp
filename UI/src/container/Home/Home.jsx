@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./home.css";
 import ProductCard from './card';
 import HomeHeader from '../navbar/homeHeader';
@@ -11,29 +11,49 @@ export default function Home() {
  const productN =['Samsung A12','PocoF12', 'VivoV15'];
  const[productdet,setProductdet]=useState();
 
-  const disproduct=async()=>{
-    try{
-        axios.post('http://localhost:4000/product/getproduct',{
-          params:{
-            productname:productN.map()
-          }
-        }).then(function (response) {
-                    console.log(response);
-                    if(response.data.data){
-                      setProductdet(response.data.data);
-                    }
-                  })
-                  .catch(function (error) {
-                    console.log(error);
-                  });
-                }catch(err){
-                  console.error(err);
-                }
-            }
+  // const disproduct=async()=>{
+  //   try{
+  //       axios.post('http://localhost:4000/product/products',{
+  //         params:{
+  //           productname:productN.map()
+  //         }
+  //       }).then(function (response) {
+  //                   console.log(response);
+  //                   if(response.data.data){
+  //                     setProductdet(response.data.data);
+  //                   }
+  //                 })
+  //                 .catch(function (error) {
+  //                   console.log(error);
+  //                 });
+  //               }catch(err){
+  //                 console.error(err);
+  //               }
+  //           }
   
   
+      const getall =async()=>{
+          try{
+              await axios.post('http://localhost:4000/product/products',{
+              }).then(function (response) {
+                          console.log(response.data.data);
+                          if(response.data.data){
+                            setProductdet(response.data.data);
+                            console.log(productdet);
+                          }
+                        })
+                        .catch(function (error) {
+                          console.log(error);
+                        });
+                      }catch(err){
+                        console.error(err);
+                      }
+                  }
+              
   
-  
+  useEffect(async()=>{
+    await getall();
+  },[]);
   
   const product = [{
     productname:"Samsung s22",
@@ -82,7 +102,7 @@ export default function Home() {
       <div className='hm-mainDiv'>   
         <div style={{display:"flex",margin:"2%"}}>
           {
-          productdet.map(()=>{
+          productdet && productdet.map(()=>{
             return(
             <ProductCard 
               details={productdet}         
