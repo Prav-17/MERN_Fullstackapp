@@ -62,9 +62,20 @@ const updateProduct= async(req,res)=>{
     }
 }
 
+const getAllProduct = async(req,res)=>{
+    try{
+        const product = await Productdetails.find();
+        res.send({Status:"Success",data:product});
+    }catch(error){
+        console.log(error);
+        res.send({Status:"Fail",data:error});
+    }
+}
+
 module.exports={
     addProduct,
     getProduct,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    getAllProduct
 }
